@@ -38,6 +38,7 @@ import org.apache.seatunnel.connectors.seatunnel.file.source.reader.OrcReadStrat
 import org.apache.seatunnel.connectors.seatunnel.file.source.reader.ParquetReadStrategy;
 import org.apache.seatunnel.connectors.seatunnel.file.source.reader.ReadStrategy;
 import org.apache.seatunnel.connectors.seatunnel.file.source.reader.TextReadStrategy;
+import org.apache.seatunnel.connectors.seatunnel.file.source.reader.WordReadStrategy;
 import org.apache.seatunnel.connectors.seatunnel.file.source.reader.XmlReadStrategy;
 
 import java.io.Serializable;
@@ -166,6 +167,18 @@ public enum FileFormat implements Serializable {
         public ReadStrategy getReadStrategy() {
             throw new UnsupportedOperationException(
                     "File format 'maxwell_json' does not support reading.");
+        }
+    },
+    WORD("docx") {
+        @Override
+        public WriteStrategy getWriteStrategy(FileSinkConfig fileSinkConfig) {
+            throw new UnsupportedOperationException(
+                "File format 'docx' does not support reading.");
+        }
+
+        @Override
+        public ReadStrategy getReadStrategy() {
+            return new WordReadStrategy();
         }
     };
 
